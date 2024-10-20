@@ -5,9 +5,9 @@ import Badge from './badge';
 const badgeData = [
     { text: "Supported 3+ Athletes", imageSource: require("../../assets/images/noun1.png") },
     { text: "Staked $1500", imageSource: require("../../assets/images/noun2.png") },
-    { text: "Staked in Rising Star", imageSource: "accessory-body-gradient-dusk.png" },
-    { text: "Stake $2000 ($320 more)", imageSource: "accessory-body-gradient-dusk.png" },
-    { text: "Support basketball", imageSource: "accessory-body-gradient-dusk.png" },
+    { text: "Staked in Rising Star", imageSource: require("../../assets/images/noun3.png") },
+    { text: "Stake $2000 ($320 more)", imageSource: require("../../assets/images/noun4.png") },
+    { text: "Support basketball", imageSource: require("../../assets/images/noun5.png") },
 ];
 
 const AchievementsFrame = () => {

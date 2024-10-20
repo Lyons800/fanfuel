@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet'; // Import the useActionSheet hook
 import { Button } from 'react-native'; // Import the Button component
 import { View } from 'react-native';
+import { Image } from 'react-native';
 
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
@@ -13,6 +14,11 @@ import { dynamicClient } from '@/client';
 import LoginScreen from '../loginScreen';
 import { ThemedText } from '@/components/ThemedText';
 import { useTokenBalances } from "@dynamic-labs/sdk-react-core";
+import DashboardIcon from '@/components/dashboardIcon';
+import Explore from '@/components/explore';
+import Rewards from '@/components/rewards';
+import StarsIcon from '@/components/rewards';
+import ExploreIcon from '@/components/explore';
 
 
 export default function TabLayout() {
@@ -57,7 +63,10 @@ export default function TabLayout() {
               <TabBarIcon name="notifications" color={Colors[colorScheme ?? 'light'].tint} />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleAvatarPress} style={{ marginLeft: 10 }}>
-              <TabBarIcon name="person" color={Colors[colorScheme ?? 'light'].tint} />
+              <Image
+                source={require('../../assets/images/noun5.png')} // Use the nouns5 PNG for the avatar
+                style={{ width: 30, height: 30 }} // Adjust the size as needed
+              />
             </TouchableOpacity>
           </View>
         ),
@@ -67,7 +76,7 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <DashboardIcon /> // Use HomeIcon component
           ),
         }}
       />
@@ -76,7 +85,16 @@ export default function TabLayout() {
         options={{
           title: 'Explore',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <DashboardIcon /> // Use ExploreIcon component
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="rewards"
+        options={{
+          title: 'Rewards',
+          tabBarIcon: ({ color, focused }) => (
+            <DashboardIcon /> // Use RewardsIcon component
           ),
         }}
       />

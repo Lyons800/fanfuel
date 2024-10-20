@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useRouter } from 'expo-router';
-
+import { LinearGradient } from 'expo-linear-gradient';
 // ... existing code ...
 
 interface AthleteCardProps {
@@ -27,36 +27,49 @@ const AthleteCard: React.FC<AthleteCardProps> = ({ id, name, sport, university, 
         <GestureHandlerRootView style={{ flex: 1 }}>
             <TouchableOpacity onPress={handlePress}>
                 <View style={styles.frameParent}>
-                    <View style={styles.frameGroup}>
-                        <Image
-                            source={typeof imageUrl === 'string' ? { uri: imageUrl } : imageUrl}
-                            style={styles.frameChild}
-                            resizeMode="cover"
-                        />
-                        <View style={[styles.frameContainer, styles.frameSpaceBlock]}>
-                            <View style={styles.jonathanPriceParent}>
-                                <Text style={[styles.jonathanPrice, styles.jonathanPriceClr]}>{name.toUpperCase()}</Text>
-                                <Text style={[styles.stanfordSoccer, styles.stakedByYouTypo]}>{`${university} | ${sport}`}</Text>
-                            </View>
-                            <View style={styles.frameView}>
-                                <View style={[styles.cardTopScoreWrapper]}>
-                                    <View style={styles.cardTopScore}>
-                                        <Text style={[styles.midfielder, styles.juniorPosition]}>{tags[0]}</Text>
-                                    </View>
-                                </View>
-                                <View style={[styles.cardTopScoreContainer]}>
-                                    <View style={styles.cardTopScore1}>
-                                        <Text style={[styles.junior, styles.juniorPosition]}>{tags[1]}</Text>
-                                    </View>
-                                </View>
-                            </View>
+                    <Image
+                        source={typeof imageUrl === 'string' ? { uri: imageUrl } : imageUrl}
+                        style={styles.frameChild}
+                        resizeMode="cover"
+                    />
+                    <View style={[styles.frameGroup, styles.frameSpaceBlock]}>
+                        <View style={styles.hanaKimParent}>
+                            <Text style={[styles.hanaKim, styles.hanaKimClr]}>{name.toUpperCase()}</Text>
+                            <Text style={[styles.stanfordSoccer, styles.fansTypo]}>{`${university} | ${sport}`}</Text>
                         </View>
-                        <View style={styles.frameSpaceBlock}>
-                            <View style={styles.cardTopScore2}>
-                                <Text style={[styles.imRaisingFunds, styles.juniorPosition]}>{bio}</Text>
+                        <View style={styles.frameContainer}>
+                            <View style={[styles.cardTopScoreWrapper, styles.cardSpaceBlock]}>
+                                <View style={styles.cardTopScore}>
+                                    <Text style={[styles.goalkeeper, styles.goalkeeperPosition]}>{tags[0]}</Text>
+                                </View>
+                            </View>
+                            <View style={[styles.cardTopScoreContainer, styles.cardSpaceBlock]}>
+                                <View style={styles.cardTopScore}>
+                                    <Text style={[styles.goalkeeper, styles.goalkeeperPosition]}>{tags[1]}</Text>
+                                </View>
                             </View>
                         </View>
                     </View>
+                    <View style={styles.frameSpaceBlock}>
+                        <View style={styles.cardTopScore2}>
+                            <Text style={[styles.iveAlwaysDreamed, styles.goalkeeperPosition]}>{bio}</Text>
+                        </View>
+                    </View>
+                    <LinearGradient style={styles.stakedParent} locations={[0, 1]} colors={['#6a2c3e', '#cf4520']}>
+                        <Text style={styles.staked}>
+                            <Text style={styles.text}>
+                                <Text style={styles.text1}>$1790</Text>
+                            </Text>
+                            <Text style={styles.fansTypo}>
+                                <Text style={styles.text}>{` `}</Text>
+                                <Text style={styles.staked2}>staked</Text>
+                            </Text>
+                        </Text>
+                        <Text style={[styles.fans, styles.fansTypo]}>
+                            <Text style={styles.text}>{`16 `}</Text>
+                            <Text style={styles.staked2}>fans</Text>
+                        </Text>
+                    </LinearGradient>
                 </View>
             </TouchableOpacity>
         </GestureHandlerRootView>
@@ -96,22 +109,26 @@ const styles = StyleSheet.create({
     frameSpaceBlock: {
         marginVertical: 5,
     },
-    jonathanPriceParent: {
-        marginBottom: 10,
+    hanaKimParent: {
+        alignItems: "center"
     },
-    jonathanPrice: {
+    hanaKim: {
         fontSize: 18,
-        fontWeight: 'bold',
+        textAlign: "left",
+        fontFamily: "LondrinaSolid-Regular"
     },
-    jonathanPriceClr: {
-        color: '#333',
+    hanaKimClr: {
+        color: "#000",
+        textAlign: "left"
     },
     stanfordSoccer: {
         fontSize: 14,
-        color: '#666',
+        textAlign: "left",
+        color: "#000"
     },
-    stakedByYouTypo: {
-        fontStyle: 'italic',
+    fansTypo: {
+        fontFamily: "LondrinaSolid-Light",
+        fontWeight: "300"
     },
     frameView: {
         flexDirection: 'row',
@@ -125,7 +142,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 5,
     },
-    midfielder: {
+    goalkeeper: {
         fontSize: 12,
         color: '#444',
     },
@@ -152,6 +169,52 @@ const styles = StyleSheet.create({
     imRaisingFunds: {
         fontSize: 12,
         color: '#444',
+    },
+    cardSpaceBlock: {
+        paddingVertical: 4,
+        paddingHorizontal: 6,
+        borderRadius: 40,
+        alignItems: "center"
+    },
+    goalkeeperPosition: {
+        textAlign: "center",
+        color: "#6a2c3e",
+        left: "50%",
+        top: "50%",
+        position: "absolute"
+    },
+    iveAlwaysDreamed: {
+        marginTop: -34,
+        marginLeft: -73,
+        width: 146,
+        fontFamily: "LondrinaSolid-Light",
+        fontWeight: "300",
+        fontSize: 14
+    },
+    text1: {
+        fontFamily: "LondrinaSolid-Regular"
+    },
+    text: {
+        color: "#fff",
+        fontSize: 14
+    },
+    staked2: {
+        color: "rgba(255, 255, 255, 0.9)",
+        fontSize: 12
+    },
+    staked: {
+        textAlign: "left"
+    },
+    fans: {
+        textAlign: "left"
+    },
+    stakedParent: {
+        justifyContent: "space-between",
+        padding: 8,
+        backgroundColor: "transparent",
+        flexDirection: "row",
+        alignItems: "center",
+        alignSelf: "stretch"
     },
 });
 

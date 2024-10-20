@@ -88,12 +88,17 @@ const AthleteDetail = () => {
         }
 
         try {
-            await sendTransaction();
-            Alert.alert('Success', 'Staking transaction sent!');
-            setAmountToStake('');
+            // Simulate a delay to mimic a real transaction
+            setLoading(true);
+            setTimeout(() => {
+                Alert.alert('Success', 'Staking transaction simulated successfully!');
+                setAmountToStake('');
+                setLoading(false);
+            }, 2000); // 2-second delay
         } catch (err) {
             console.error('Error while staking:', err);
             Alert.alert('Error', 'Failed to stake.');
+            setLoading(false);
         }
     };
 
