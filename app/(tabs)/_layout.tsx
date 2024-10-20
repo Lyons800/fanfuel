@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { useReactiveClient } from "@dynamic-labs/react-hooks";
-
+import { TouchableOpacity } from 'react-native';
 
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
@@ -11,7 +11,7 @@ import LoginScreen from '../loginScreen';
 import { ThemedText } from '@/components/ThemedText';
 
 export default function TabLayout() {
-  const { auth, sdk } = useReactiveClient(dynamicClient);
+  const { auth, sdk, } = useReactiveClient(dynamicClient);
   const colorScheme = useColorScheme();
 
   if (!sdk.loaded) {
@@ -19,14 +19,19 @@ export default function TabLayout() {
   }
 
   if (!auth.token) {
-    return <LoginScreen />; 
+    return <LoginScreen />;
   }
 
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
+        headerShown: true, // Enable header
+        headerRight: () => (
+          <TouchableOpacity onPress={dynamicClient.auth.logout}>
+            <ThemedText style={{ marginRight: 10 }}>Logout</ThemedText>
+          </TouchableOpacity>
+        ),
       }}>
       <Tabs.Screen
         name="index"
