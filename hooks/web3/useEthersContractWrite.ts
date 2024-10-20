@@ -12,7 +12,7 @@ export function useEthersContractWrite({ contract, functionName, args }: { contr
     const primaryWallet = wallets.primary;
 
     // Create the ethers provider and signer
-    const provider = new ethers.JsonRpcProvider('https://rpc.ankr.com/flow_testnet'); // Replace with your RPC URL
+    const provider = new ethers.JsonRpcProvider('https://testnet.evm.nodes.onflow.org'); // Replace with your RPC URL
     const signer = primaryWallet ? provider.getSigner(primaryWallet.address) : null;
 
     // Function to simulate and approve tokens
