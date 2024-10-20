@@ -1,16 +1,13 @@
+import { dynamicClient } from '@/client';
 import React from 'react';
 import { View, Button, Text } from 'react-native';
 
 
 export default function LoginScreen() {
 
-    const handleLogin = () => {
-        // Implement your login logic here
-    };
-
     return (
-        <View>
-            <Button title="Login with Dynamic Wallet" onPress={handleLogin} />
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Button onPress={() => dynamicClient.ui.auth.show()} title="Open Auth Flow UI" />
             <Text>
                 Access granted
             </Text>
