@@ -59,7 +59,7 @@ export function useContractWrite({ contract, functionName, args }: { contract: a
             console.log('Request object from simulateContract:', request);
 
             // If simulation is successful, proceed to write the contract
-            const txHash = await (await walletClient).writeContract(request);
+            const txHash = await (await walletClient)?.writeContract(request);
 
             // Debugging: Log the transaction hash
             console.log('Transaction hash from writeContract:', txHash);

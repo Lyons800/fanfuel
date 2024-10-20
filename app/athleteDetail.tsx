@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import AthleteBio from '@/components/athleteBio';
-import { useContractWrite } from '@/hooks/web3/useViemContractWrite';
+import { useEthersContractWrite } from '@/hooks/web3/useEthersContractWrite'; // Use your custom hook
 import athleteStakingAbi from '@/contracts/AthleteStakingAbi.json';
 import flowTestTokenAbi from '@/contracts/FlowTestTokenAbi.json';
 
@@ -59,7 +59,7 @@ const AthleteDetail = () => {
     const stakingContractAddress = '0x8fB0C3EF4FAc137D7Bd7ac8d850Ac552b99B5538';
     const tokenContractAddress = '0xc62B54A1d4FBBB7b05A53b6039372793842D5c51';
 
-    const { sendTransaction, simulateAndApproveTokens, transaction, loading: contractLoading, error } = useContractWrite({
+    const { sendTransaction, simulateAndApproveTokens, transaction, loading: contractLoading, error } = useEthersContractWrite({
         contract: {
             address: stakingContractAddress,
             abi: athleteStakingAbi,
