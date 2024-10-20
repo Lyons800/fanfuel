@@ -1,0 +1,49 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "sport": "Basketball",
+        "university": "University of Example",
+        "imageName": "player1.png",
+        "backgroundImageName": "playerbg1.png",
+        "tags": ["MVP", "All-Star"],
+        "bio": "John is a top player in the league with numerous awards."
+    },
+    {
+        "id": 2,
+        "name": "Jane Smith",
+        "sport": "Soccer",
+        "university": "Example State University",
+        "imageName": "player2.png",
+        "backgroundImageName": "playerbg2.png",
+        "tags": ["Captain", "Goal Scorer"],
+        "bio": "Jane leads her team with exceptional skills and leadership."
+    },
+    {
+        "id": 3,
+        "name": "Alice Johnson",
+        "sport": "Tennis",
+        "university": "Example University",
+        "imageName": "player3.png",
+        "tags": ["Champion", "Top Seed"],
+        "bio": "Alice has won multiple championships and is a top-ranked player."
+    },
+    {
+        "id": 4,
+        "name": "Bob Brown",
+        "sport": "Football",
+        "university": "Example University",
+        "imageName": "player4.png",
+        "tags": ["All-American", "Prospect"],
+        "bio": "Bob is a promising athlete with great potential."
+    },
+    {
+        "id": 5,
+        "name": "Charlie Davis",
+        "sport": "Basketball",
+        "university": "Example University",
+        "imageName": "player5.png",
+        "tags": ["Rookie", "Star"],
+        "bio": "Charlie is a rookie with a bright future."
+    }
+]

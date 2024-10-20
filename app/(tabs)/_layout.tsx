@@ -4,6 +4,7 @@ import { useReactiveClient } from "@dynamic-labs/react-hooks";
 import { TouchableOpacity } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet'; // Import the useActionSheet hook
 import { Button } from 'react-native'; // Import the Button component
+import { View } from 'react-native';
 
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
@@ -52,12 +53,20 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: true,
+        headerLeft: () => (
+          <ThemedText style={{ marginLeft: 10 }}>
+            Welcome back, {auth.authenticatedUser?.firstName || 'Guest'}
+          </ThemedText>
+        ),
         headerRight: () => (
-          <Button
-            onPress={() => dynamicClient.auth.logout()} // Use the logout function directly
-            title="Logout" // Set the button title
-            color={Colors[colorScheme ?? 'light'].tint} // Set the button color
-          />
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => {/* Handle notifications */ }}>
+              <TabBarIcon name="notifications" color={Colors[colorScheme ?? 'light'].tint} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleAvatarPress}>
+              <TabBarIcon name="person" color={Colors[colorScheme ?? 'light'].tint} />
+            </TouchableOpacity>
+          </View>
         ),
       }}>
       <Tabs.Screen

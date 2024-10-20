@@ -1,52 +1,23 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, View, ScrollView, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import TopSection from '@/components/home/topSection';
+import SupportedAthletes from '@/components/home/supportedAthletes';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ScrollView>
+      {/* Cards Section */}
+      <TopSection />
+      <SupportedAthletes />
+    </ScrollView >
   );
 }
 
@@ -55,10 +26,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    marginBottom: 16,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  sectionContainer: {
+    marginBottom: 24,
+    paddingHorizontal: 16,
+    gap: 16,
+
   },
   reactLogo: {
     height: 178,
@@ -66,5 +40,48 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  fullCard: {
+    height: 100, // Adjust height as needed
+    marginBottom: 16,
+  },
+  cardRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 32, // Increase spacing between rows
+  },
+  halfCard: {
+    width: '48%', // Adjust width to fit two cards in a row
+    height: 100, // Adjust height as needed
+    backgroundColor: '#e0e0e0', // Example background color
+    borderWidth: 1, // Add border
+    borderColor: '#ccc', // Border color
+    borderRadius: 8, // Optional: round the corners
+    padding: 10, // Add padding inside the card
+  },
+  gradientCard: {
+    height: 100,
+    width: '100%',
+    padding: 20,
+    borderRadius: 10,
+    justifyContent: 'center',
+  },
+  cardContent: {
+    // Add styles for the card content here
+  },
+  cardTitle: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  cardAmount: {
+    color: '#fff',
+    fontSize: 32,
+    fontWeight: 'bold',
+  },
+  button: {
+    // Add styles for the button here
+  },
+  buttonText: {
+    // Add styles for the button text here
   },
 });
