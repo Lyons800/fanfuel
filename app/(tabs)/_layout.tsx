@@ -19,7 +19,7 @@ export default function TabLayout() {
   }
 
   if (!auth.token) {
-    return <LoginScreen />; // Redirect to LoginScreen if no auth token
+    return <LoginScreen />; 
   }
 
   return (
