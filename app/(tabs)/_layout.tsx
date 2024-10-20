@@ -53,17 +53,21 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: true,
+        headerTitle: '', // Set headerTitle to an empty string to remove the default page name
+        headerStyle: {
+          height: 120, // Adjust the height to make the header bigger
+        },
         headerLeft: () => (
-          <ThemedText style={{ marginLeft: 10 }}>
+          <ThemedText style={{ marginLeft: 10, fontSize: 22, fontFamily: 'LondrinaSolid' }}>
             Welcome back, {auth.authenticatedUser?.firstName || 'Guest'}
           </ThemedText>
         ),
         headerRight: () => (
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 20 }}>
             <TouchableOpacity onPress={() => {/* Handle notifications */ }}>
               <TabBarIcon name="notifications" color={Colors[colorScheme ?? 'light'].tint} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleAvatarPress}>
+            <TouchableOpacity onPress={handleAvatarPress} style={{ marginLeft: 10 }}>
               <TabBarIcon name="person" color={Colors[colorScheme ?? 'light'].tint} />
             </TouchableOpacity>
           </View>
