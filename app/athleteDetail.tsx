@@ -11,10 +11,14 @@ import {
     SafeAreaView,
     TouchableWithoutFeedback,
     Keyboard,
-    Image, // Import Image component
+    Image,
+    Alert, // Import Image component
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import AthleteBio from '@/components/athleteBio';
+import { useContractWrite } from '@/hooks/web3/useViemContractWrite';
+import athleteStakingAbi from '@/contracts/AthleteStakingAbi.json';
+import flowTestTokenAbi from '@/contracts/FlowTestTokenAbi.json';
 
 // Define the Athlete type
 interface Athlete {
@@ -49,6 +53,49 @@ const AthleteDetail = () => {
     const [athlete, setAthlete] = useState<Athlete | null>(null);
     const [loading, setLoading] = useState(true);
     const [inputValue, setInputValue] = useState('1 FLOW');
+    const [amountToStake, setAmountToStake] = useState('');
+    const [playerId] = useState(1); // Example player ID, change this if it's dynamic
+
+    const stakingContractAddress = '0x8fB0C3EF4FAc137D7Bd7ac8d850Ac552b99B5538';
+    const tokenContractAddress = '0xc62B54A1d4FBBB7b05A53b6039372793842D5c51';
+
+    const { sendTransaction, simulateAndApproveTokens, transaction, loading: contractLoading, error } = useContractWrite({
+        contract: {
+            address: stakingContractAddress,
+            abi: athleteStakingAbi,
+            tokenAddress: tokenContractAddress,
+            tokenAbi: flowTestTokenAbi,
+        },
+        functionName: 'stake',
+        args: [playerId, amountToStake],
+    });
+
+    const handleApproval = async () => {
+        try {
+            // Ensure the wallet interaction is opened as a modal or new screen
+            await simulateAndApproveTokens(stakingContractAddress, amountToStake);
+            Alert.alert('Success', 'Approval transaction sent!');
+        } catch (err) {
+            console.error('Error during approval:', err);
+            Alert.alert('Error', 'Failed to approve.');
+        }
+    };
+
+    const handleStake = async () => {
+        if (isNaN(Number(amountToStake)) || Number(amountToStake) <= 0) {
+            Alert.alert('Error', 'Please enter a valid amount to stake.');
+            return;
+        }
+
+        try {
+            await sendTransaction();
+            Alert.alert('Success', 'Staking transaction sent!');
+            setAmountToStake('');
+        } catch (err) {
+            console.error('Error while staking:', err);
+            Alert.alert('Error', 'Failed to stake.');
+        }
+    };
 
     useEffect(() => {
         if (id !== null) {
@@ -118,14 +165,27 @@ const AthleteDetail = () => {
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={styles.input}
-                            placeholder="Enter your comment"
-                            value={inputValue}
-                            onChangeText={setInputValue}
+                            placeholder="Enter amount to stake"
+                            value={amountToStake}
+                            onChangeText={setAmountToStake}
+                            keyboardType="numeric"
                         />
-                        <Button
-                            title={`Stake to Support ${athlete?.name}`}
-                            onPress={handleButtonPress}
-                        />
+                        {loading ? (
+                            <ActivityIndicator size="large" color="#0000ff" />
+                        ) : (
+                            <>
+                                <Button
+                                    title="Approve Tokens"
+                                    onPress={handleApproval}
+                                    disabled={loading || !amountToStake}
+                                />
+                                <Button
+                                    title="Stake Tokens"
+                                    onPress={handleStake}
+                                    disabled={loading || !amountToStake}
+                                />
+                            </>
+                        )}
                     </View>
                 </KeyboardAvoidingView>
             </TouchableWithoutFeedback>

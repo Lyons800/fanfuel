@@ -1,4 +1,4 @@
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
 import { useReactiveClient } from "@dynamic-labs/react-hooks";
 import { TouchableOpacity } from 'react-native';
@@ -19,26 +19,15 @@ export default function TabLayout() {
   const { auth, sdk, wallets } = useReactiveClient(dynamicClient); // Destructure wallets from useReactiveClient
   const colorScheme = useColorScheme();
   const { showActionSheetWithOptions } = useActionSheet(); // Destructure the showActionSheetWithOptions function
+  const router = useRouter(); // Initialize the router
 
 
   const handleAvatarPress = () => {
-    const options = ['View Profile', 'Logout', 'Cancel'];
-    const cancelButtonIndex = 2;
 
-    showActionSheetWithOptions(
-      {
-        options,
-        cancelButtonIndex,
-      },
-      (buttonIndex) => {
-        if (buttonIndex === 0) {
-          // Handle 'View Profile' action
-        } else if (buttonIndex === 1) {
-          // Handle 'Logout' action
-        }
-      }
-    );
-  };
+    router.push({ pathname: '/user' });
+
+  }
+
 
   if (!sdk.loaded) {
     return <ThemedText>Loading...</ThemedText>;

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, ScrollView } from "react-native";
 import { useReactiveClient } from "@dynamic-labs/react-hooks";
 import { dynamicClient } from "@/client";
 
@@ -7,7 +7,7 @@ export const DisplayAuthenticatedUserView: FC = () => {
   const { auth, wallets } = useReactiveClient(dynamicClient);
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.section}>
         <Text style={styles.section__heading}>User:</Text>
         <View style={styles.content_section}>
@@ -58,7 +58,7 @@ export const DisplayAuthenticatedUserView: FC = () => {
           ))}
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

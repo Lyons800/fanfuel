@@ -96,14 +96,14 @@ export default function StakeScreen() {
                 {transaction && (
                     <View style={{ marginTop: 20 }}>
                         <Text style={{ fontSize: 16 }}>Transaction Hash:</Text>
-                        <Text>{transaction.transactionHash}</Text>
+                        {/* <Text>{transaction.transactionHash}</Text> */}
                     </View>
                 )}
 
                 {/* Display error message if there is an error */}
                 {error && (
                     <View style={{ marginTop: 20 }}>
-                        <Text style={{ color: 'red' }}>Error: {error?.message}</Text>
+                        {/* <Text style={{ color: 'red' }}>Error: {error?.message}</Text> */}
                     </View>
                 )}
             </View>
